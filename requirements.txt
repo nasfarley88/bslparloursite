@@ -1,4 +1,4 @@
 Django==1.8
-django-sizefield==0.7
+djangorestframework==3.1.1
 gunicorn==19.3.0
 psycopg2==2.6
