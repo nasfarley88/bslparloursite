@@ -1,5 +1,6 @@
 from django.db import models
-from hashlib import sha224
+from model_utils.fields import MonitorField
+from sizefield.models import FileSizeField
 
 class CastMember(models.Model):
     """Simple model to store basic information about people participating in videos."""
@@ -8,23 +9,21 @@ class CastMember(models.Model):
     middle_names = models.CharField(max_length=120, blank=True)
     preffered_name = models.CharField(max_length=40, blank=True)
     bio = models.TextField()
-    bio_last_update = models.DateTimeField()
-    # mug_shot = models.ImageField()
+    bio_last_update = MonitorField(monitor='bio')
+    mug_shot = models.ImageField(blank=True) # TODO get a blank image to put here.
 
     def __unicode__(self):
         return self.first_name +" "+ self.last_name
-
     
 
 # Create your models here.
 class Video(models.Model):
-    # TODO figure out the real length that is needed for each field
     sha224_id = models.CharField(primary_key=True, max_length=56)
     filename = models.CharField(max_length=200)
     dropbox_directory = models.CharField(max_length=200)
     mime_type = models.CharField(max_length=200)
-    date_added = models.DateTimeField('Date added to database')
-    size = models.BigIntegerField()
+    date_added = MonitorField(monitor='sha224_id')
+    size = FileSizeField()
     cast_members = models.ManyToManyField(CastMember)
     
     def __unicode__(self):
