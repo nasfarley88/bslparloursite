@@ -1,7 +1,8 @@
 from django.db import models
+from django.utils import timezone
 from model_utils.fields import MonitorField
 from sizefield.models import FileSizeField
-
+0
 class CastMember(models.Model):
     """Simple model to store basic information about people participating in videos."""
     first_name = models.CharField(max_length=40)
@@ -15,17 +16,17 @@ class CastMember(models.Model):
     def __unicode__(self):
         return self.first_name +" "+ self.last_name
     
-
 # Create your models here.
 class Video(models.Model):
-    sha224_id = models.CharField(primary_key=True, max_length=56)
+    sha224 = models.CharField(max_length=56)
     filename = models.CharField(max_length=200)
     dropbox_directory = models.CharField(max_length=200)
     mime_type = models.CharField(max_length=200)
-    date_added = MonitorField(monitor='sha224_id')
+    date_added = models.DateTimeField(default=timezone.now, editable=False)
     size = FileSizeField()
     cast_members = models.ManyToManyField(CastMember)
-    
+    owner = models.ForeignKey('auth.User', related_name='videos')
+
     def __unicode__(self):
         return self.filename or self.sha224_id
 
