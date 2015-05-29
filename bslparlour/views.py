@@ -1,5 +1,6 @@
+from django.contrib.auth.models import User
 from bslparlour.models import SourceVideo, NotSourceVideo
-from bslparlour.serializers import SourceVideoSerializer, NotSourceVideoSerializer
+from bslparlour.serializers import SourceVideoSerializer, NotSourceVideoSerializer, UserSerializer
 from rest_framework import generics
 
 # from .models import BSLDictionaryEntry, EnglishDictionaryEntry
@@ -13,15 +14,25 @@ class SourceVideoList(generics.ListCreateAPIView):
     queryset = SourceVideo.objects.all()
     serializer_class = SourceVideoSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
 
 class NotSourceVideoList(generics.ListCreateAPIView):
     queryset = NotSourceVideo.objects.all()
     serializer_class = NotSourceVideoSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 
 # def gloss(request, gloss_str):

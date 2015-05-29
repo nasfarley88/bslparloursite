@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from model_utils.fields import MonitorField
 from sizefield.models import FileSizeField
-0
+
 class CastMember(models.Model):
     """Simple model to store basic information about people participating in videos."""
     first_name = models.CharField(max_length=40)
@@ -25,7 +25,7 @@ class Video(models.Model):
     date_added = models.DateTimeField(default=timezone.now, editable=False)
     size = FileSizeField()
     cast_members = models.ManyToManyField(CastMember)
-    owner = models.ForeignKey('auth.User', related_name='videos')
+    # owner = models.ForeignKey('auth.User', related_name='videos')
 
     def __unicode__(self):
         return self.filename or self.sha224_id
