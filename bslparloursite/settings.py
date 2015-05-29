@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bslparlour',
+    'bsldictionary',
     'rest_framework',
     'django_extensions',
 )
