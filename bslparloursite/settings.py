@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['bslparlour.nathanda.co.uk']
 # Application definition
 
 INSTALLED_APPS = (
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bslparlour',
     'bsldictionary',
+    'bslbot',
+    'bslgames',
     'rest_framework',
     'django_extensions',
 )

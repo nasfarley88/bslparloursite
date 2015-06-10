@@ -2,12 +2,14 @@ from django.contrib.auth.models import User
 from bslparlour.models import SourceVideo, NotSourceVideo
 from bslparlour.serializers import SourceVideoSerializer, NotSourceVideoSerializer, UserSerializer
 from rest_framework import generics
+from django.http import HttpResponse
+
+# todo neaten up
+import random
+from bsldictionary.models import BSLEntry
 
 # from .models import BSLDictionaryEntry, EnglishDictionaryEntry
 # Create your views here.
-
-# def index(request):
-#     return HttpResponse("This is the index page.")
 
 
 class SourceVideoList(generics.ListCreateAPIView):

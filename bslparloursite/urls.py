@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^bslparlour/', include('bslparlour.urls')),
+    url(r'^bslgames/', include('bslgames.urls')),
 ]

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from model_utils.fields import MonitorField
 from sizefield.models import FileSizeField
+from django.utils.html import format_html
 
 class CastMember(models.Model):
     """Simple model to store basic information about people participating in videos."""
@@ -35,6 +36,14 @@ class SourceVideo(Video):
     vimeo_uri = models.IntegerField()
     # TODO replace with YouTube's equivilent of a URI
     youtube_url = models.CharField(max_length=140, blank=True)
+
+    def vimeo_embed_property(self):
+        return format_html('<iframe src="https://player.vimeo.com/video/'+str(self.vimeo_uri)+'?color=ffffff&title=0&byline=0&portrait=0" width="300" height="170" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
+    vimeo_embed_property.allow_tags = True
+    vimeo_embed = property(vimeo_embed_property)
+
+    def __unicode__(self):
+        return self.filename + " (" + str(self.vimeo_uri) +")" or self.sha224_id
 
 class NotSourceVideo(Video):
     target_platform_choices = (
